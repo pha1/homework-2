@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static String output = "";
     public static int weight = 0;
-    public static int drinkSize = 1;
     public static int numDrinks = 0;
     public static double bac = 0;
     public static ArrayList<Drink> drinks = new ArrayList<>();
@@ -82,27 +81,6 @@ public class MainActivity extends AppCompatActivity {
                     // Toast message when a positive number is not entered
                     Toast.makeText(MainActivity.this, "Please enter a valid positive" +
                             " number", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        RadioGroup drink_size_group = findViewById(R.id.drink_size_group);
-
-        // When the user clicks on a new size, the drink size is updated
-        drink_size_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                // If 1 oz is checked
-                if (checkedId == R.id.one_oz){
-                    drinkSize = 1;
-                }
-                // If 5 oz is checked
-                else if (checkedId == R.id.five_oz){
-                    drinkSize = 5;
-                }
-                // If 12 oz is checked
-                else if (checkedId == R.id.twelve_oz){
-                    drinkSize = 12;
                 }
             }
         });

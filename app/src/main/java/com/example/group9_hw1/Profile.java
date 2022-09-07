@@ -6,7 +6,6 @@ public class Profile {
     int weight;
 
     public Profile(){
-
     }
 
     public Profile(String gender, int weight){
