@@ -5,7 +5,8 @@
     <string name="gender_title">Gender:</string>
     <string name="female_radio">Female</string>
     <string name="male_radio">Male</string>
-    <string name="set_weight">Set Weight</string>
+    <string name="set_weight">Set</string>
+    <string name="cancel">Cancel</string>
     <string name="weight_2">Weight:</string>
     <string name="weight_display"></string>
     <string name="drink_size">Drink Size</string>

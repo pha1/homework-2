@@ -8,61 +8,14 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/weight"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editWeight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/weight_message"
-        android:inputType="number"
-        android:text="@string/weight_text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/weight"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
-
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/gender_title"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/weight"
-        app:layout_constraintStart_toStartOf="@+id/weight"
-        app:layout_constraintTop_toBottomOf="@+id/weight" />
-
-    <Button
-        android:id="@+id/setWeight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/set_weight"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gender" />
-
-    <TextView
         android:id="@+id/weightDisplayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
         android:text="@string/weight_2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setWeight" />
+        tools:layout_editor_absoluteY="42dp" />
 
     <TextView
         android:id="@+id/weightDisplay"
@@ -174,30 +127,6 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BACLevel" />
-
-    <RadioGroup
-        android:id="@+id/gender_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/gender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gender"
-        app:layout_constraintTop_toTopOf="@+id/gender">
-
-        <RadioButton
-            android:id="@+id/radioFemale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/female_radio"
-            android:checked="true" />
-
-        <RadioButton
-            android:id="@+id/radioMale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/male_radio" />
-    </RadioGroup>
 
     <RadioGroup
         android:id="@+id/drink_size_group"
