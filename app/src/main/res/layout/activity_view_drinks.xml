@@ -6,4 +6,152 @@
     android:layout_height="match_parent"
     tools:context=".ViewDrinksActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_drink"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drink_outOf"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drink_total"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_x"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_alcohol"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="254dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_percent"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="254dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_oz"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="187dp"
+        tools:layout_editor_absoluteY="194dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_ozCount"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="194dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_added"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="321dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="119dp"
+        android:layout_height="25dp"
+        android:text="@string/view_drinks_date"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_drinks_time"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="116dp"
+        android:layout_height="42dp"
+        android:text="@string/view_drinks_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="531dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="68dp"
+        android:layout_height="62dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scrollbarThumbHorizontal="@drawable/ic_trash"
+        app:srcCompat="@drawable/ic_trash"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="68dp"
+        android:layout_height="62dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scrollbarThumbHorizontal="@drawable/ic_previous"
+        app:srcCompat="@drawable/ic_previous"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="68dp"
+        android:layout_height="62dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:scrollbarThumbHorizontal="@drawable/ic_next"
+        app:srcCompat="@drawable/ic_next"
+        tools:layout_editor_absoluteX="304dp"
+        tools:layout_editor_absoluteY="415dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

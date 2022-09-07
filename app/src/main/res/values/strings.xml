@@ -26,5 +26,17 @@
     <string name="status2">Be careful.</string>
     <string name="status3">Over the limit!</string>
     <string name="weight_message">Enter weight</string>
-    <string name="view_drinks">View Drinks</string>
+    <string name="view_drinks_drink">Drink</string>
+    <string name="view_drinks_x">1</string>
+    <string name="view_drink_outOf">out of</string>
+    <string name="view_drink_total">3</string>
+    <string name="view_drinks_ozCount">1</string>
+    <string name="view_drinks_oz">oz</string>
+    <string name="view_drinks_percent">30</string>
+    <string name="view_drinks_alcohol">% Alcohol</string>
+    <string name="view_drinks_added">Added</string>
+    <string name="view_drinks_date">08/30/2022</string>
+    <string name="view_drinks_time">05:30 PM</string>
+    <string name="view_drinks_close">Close</string>
+
 </resources>

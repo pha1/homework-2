@@ -15,6 +15,8 @@ public class SetProfileActivity extends AppCompatActivity {
     public static String gender;
     final public static String PROFILE_KEY = "PROFILE";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
