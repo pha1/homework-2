@@ -8,7 +8,7 @@
     <string name="set_weight">Set</string>
     <string name="cancel">Cancel</string>
     <string name="weight_2">Weight:</string>
-    <string name="weight_display"></string>
+    <string name="weight_display">N/A</string>
     <string name="drink_size">Drink Size</string>
     <string name="one_oz">1 oz</string>
     <string name="five_oz">5 oz</string>
@@ -25,4 +25,5 @@
     <string name="status2">Be careful.</string>
     <string name="status3">Over the limit!</string>
     <string name="weight_message">Enter weight</string>
+    <string name="view_drinks">View Drinks</string>
 </resources>

@@ -9,12 +9,10 @@ package com.example.group9_hw1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     public static String output = "";
     public static int weight = 0;
     public static int drinkSize = 1;
-    public static double alcohol_percentage = 0;
     public static int numDrinks = 0;
     public static double bac = 0;
     public static ArrayList<Drink> drinks = new ArrayList<>();
@@ -89,32 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // SEEKBAR/ALCOHOL PERCENTAGE
-        SeekBar seekBar = findViewById(R.id.seekBar);
-        TextView progress = findViewById(R.id.viewProgress);
-
-        // Initiate the text value for the progress
-        progress.setText("0%");
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            // As the seekbar is used, the percentage displayed is updated
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                progress.setText(i + "%");
-                alcohol_percentage = (double)i/100.0;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
         RadioGroup drink_size_group = findViewById(R.id.drink_size_group);
 
         // When the user clicks on a new size, the drink size is updated
@@ -138,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
 
         TextView numDrinkDisplay = findViewById(R.id.numDrinkDisplay);
         TextView BACnum = findViewById(R.id.BACNum);
-        Button addDrinkButton = findViewById(R.id.addDrinkButton);
+        Button addDrinkButton = findViewById(R.id.addDrinkButton2);
 
         // Add Drink Button
         // Adds a drink to the number of drinks
         // Also calls on a method that calculates the BAC Level and displays it
-        findViewById(R.id.addDrinkButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.addDrinkButton2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -197,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 genderGroup.clearCheck();
                 genderGroup.check(R.id.radioFemale);
                 drink_size_group.check(R.id.one_oz);
-                seekBar.setProgress(0);
                 drinks.clear();
                 addDrinkButton.setEnabled(true);
 

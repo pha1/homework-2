@@ -6,4 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".AddDrinkActivity">
 
+    <Button
+        android:id="@+id/cancelButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_drink"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/addDrinkButton2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addDrinkButton2" />
+
+    <Button
+        android:id="@+id/addDrinkButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="56dp"
+        android:text="@string/add_drink"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/resetButton"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <TextView
+        android:id="@+id/viewProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:max="30"
+        app:layout_constraintBottom_toBottomOf="@+id/alcoholPercentage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/alcoholPercentage"
+        app:layout_constraintTop_toTopOf="@+id/alcoholPercentage" />
+
+    <TextView
+        android:id="@+id/alcoholPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/alcohol_title"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/drinkSize"
+        app:layout_constraintTop_toBottomOf="@+id/drinkSize" />
+
+    <RadioGroup
+        android:id="@+id/drink_size_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/drinkSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/drinkSize"
+        app:layout_constraintTop_toTopOf="@+id/drinkSize">
+
+        <RadioButton
+            android:id="@+id/one_oz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/one_oz" />
+
+        <RadioButton
+            android:id="@+id/five_oz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/five_oz" />
+
+        <RadioButton
+            android:id="@+id/twelve_oz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/twelve_oz" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/drinkSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/drink_size"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
