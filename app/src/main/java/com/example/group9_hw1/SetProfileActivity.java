@@ -2,6 +2,7 @@ package com.example.group9_hw1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +23,8 @@ public class SetProfileActivity extends AppCompatActivity {
 
         EditText editText = findViewById(R.id.editWeight);
         RadioGroup genderGroup = findViewById(R.id.gender_group);
+
+        gender = "Female";
 
         // Check to see which radio button is checked
         // and apply the gender to the display
@@ -51,6 +54,12 @@ public class SetProfileActivity extends AppCompatActivity {
                     }
 
                     Profile profile = new Profile(gender, weight);
+
+                    Intent intent = new Intent();
+                    intent.putExtra(PROFILE_KEY, profile);
+                    setResult(RESULT_OK, intent);
+                    finish();
+
                 } catch (Exception e)
                 {
                     // Toast message when a positive number is not entered

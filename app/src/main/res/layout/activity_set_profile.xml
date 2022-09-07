@@ -16,6 +16,19 @@
         app:layout_constraintStart_toEndOf="@+id/gender"
         app:layout_constraintTop_toTopOf="@+id/gender">
 
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="97dp"
+            android:layout_height="38dp"
+            android:checked="true"
+            android:text="@string/female_radio" />
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:text="@string/male_radio" />
+
     </RadioGroup>
 
     <TextView
@@ -28,23 +41,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioButton
-        android:id="@+id/radioFemale"
-        android:layout_width="97dp"
-        android:layout_height="38dp"
-        android:checked="true"
-        android:text="@string/female_radio"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="87dp" />
-
-    <RadioButton
-        android:id="@+id/radioMale"
-        android:layout_width="100dp"
-        android:layout_height="34dp"
-        android:text="@string/male_radio"
-        tools:layout_editor_absoluteX="236dp"
-        tools:layout_editor_absoluteY="87dp" />
 
     <EditText
         android:id="@+id/editWeight"

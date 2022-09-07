@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // Add Drink Button
         // Adds a drink to the number of drinks
         // Also calls on a method that calculates the BAC Level and displays it
+        /*
         findViewById(R.id.addDrinkButton2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +134,10 @@ public class MainActivity extends AppCompatActivity {
                 BACNum.setText(getResources().getText(R.string.BAC_num));
             }
         });
+        */
     }
+
+
 
     /**
      * This method calculates the BAC Level with the given formula
@@ -142,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
      * @param weight the weight entered
      * @return double value of the % BAC
      */
+    /*
     public double calculateBAC(String gender, int weight){
         double bac;
         double r;
@@ -166,11 +171,15 @@ public class MainActivity extends AppCompatActivity {
         return bac;
     }
 
+
+     */
+
     /**
      * This method checks the BAC Level to determine the status message
      * It also sets the boolean notSafe to true if the BAC level is higher than .25
      * @param bac double value used to determine the status
      */
+    /*
     public void checkBACLevel(double bac){
 
         TextView status = findViewById(R.id.status);
@@ -194,4 +203,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+     */
 }
