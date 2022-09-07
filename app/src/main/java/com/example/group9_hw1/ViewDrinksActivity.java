@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 public class ViewDrinksActivity extends AppCompatActivity {
 
+    public static int numDrinks = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

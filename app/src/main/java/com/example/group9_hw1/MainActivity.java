@@ -6,8 +6,13 @@
 
 package com.example.group9_hw1;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,71 +25,40 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String output = "";
-    public static int weight = 0;
-    public static int numDrinks = 0;
     public static double bac = 0;
     public static ArrayList<Drink> drinks = new ArrayList<>();
     public static boolean notSafe = false;
     public static boolean weightSet = false;
+
+    Profile profile;
+
+    // Receives the results from department activity
+    ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result != null && result.getResultCode() == RESULT_OK){
+                if(result.getData() != null && result.getData().getStringExtra(SetProfileActivity.PROFILE_KEY) != null){
+                    profile = result.getData().getParcelableExtra(SetProfileActivity.PROFILE_KEY);
+                }
+            }
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Gender selection
-        EditText editText = findViewById(R.id.editWeight);
-        TextView weightDisplay = findViewById(R.id.weightDisplay);
-        RadioGroup genderGroup = findViewById(R.id.gender_group);
-
-        // Default value for text to be added onto the Weight when entered
-        // Used on line 71, if the user does not change the gender from default "Female"
-        output = "Female";
-
-        // Check to see which radio button is checked
-        // and apply the gender to the display
-        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                if (checkedId == R.id.radioFemale){
-                    output = "Female";
-                }
-                else if (checkedId == R.id.radioMale){
-                    output = "Male";
-                }
-            }
-        });
-
-        // SET WEIGHT
-        findViewById(R.id.setWeight).setOnClickListener(new View.OnClickListener() {
+        // Set Profile Activity
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    // Check if the value can be parsed into an int
-                    weight = Integer.parseInt(editText.getText().toString());
-
-                    // If the number is less than 0, show the Toast message
-                    if (weight < 0) {
-                        throw new IllegalArgumentException();
-                    }
-
-                    // Set Weight Display
-                    weightDisplay.setText(weight + " (" + output + ")");
-
-                    // Clears the weight text
-                    editText.setText("");
-                    weightSet = true;
-
-                } catch (Exception e)
-                {
-                    // Toast message when a positive number is not entered
-                    Toast.makeText(MainActivity.this, "Please enter a valid positive" +
-                            " number", Toast.LENGTH_SHORT).show();
-                }
+                Intent profileIntent = new Intent(MainActivity.this, SetProfileActivity.class);
+                startForResult.launch(profileIntent);
             }
         });
 
+        TextView weightDisplay = findViewById(R.id.weightDisplay);
         TextView numDrinkDisplay = findViewById(R.id.numDrinkDisplay);
         TextView BACnum = findViewById(R.id.BACNum);
         Button addDrinkButton = findViewById(R.id.addDrinkButton2);
