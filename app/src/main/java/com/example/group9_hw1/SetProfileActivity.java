@@ -15,8 +15,6 @@ public class SetProfileActivity extends AppCompatActivity {
     public static String gender;
     final public static String PROFILE_KEY = "PROFILE";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +55,7 @@ public class SetProfileActivity extends AppCompatActivity {
 
                     Profile profile = new Profile(gender, weight);
 
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(SetProfileActivity.this, MainActivity.class);
                     intent.putExtra(PROFILE_KEY, profile);
                     setResult(RESULT_OK, intent);
                     finish();
@@ -72,7 +70,7 @@ public class SetProfileActivity extends AppCompatActivity {
         });
 
         // Close Set Profile Activity without any information
-        findViewById(R.id.cancelWeight).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setWeight2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {finish();}
         });

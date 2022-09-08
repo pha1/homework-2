@@ -26,6 +26,7 @@
     <string name="status2">Be careful.</string>
     <string name="status3">Over the limit!</string>
     <string name="weight_message">Enter weight</string>
+    <string name="view_drinks">View Drinks</string>
     <string name="view_drinks_drink">Drink</string>
     <string name="view_drinks_x">1</string>
     <string name="view_drink_outOf">out of</string>

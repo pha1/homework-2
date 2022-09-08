@@ -1,5 +1,5 @@
 /**
- * Homework 1
+ * Homework 2
  * Phi Ha
  * Srinath Dittakavi
  */
@@ -25,20 +25,51 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static double bac = 0;
+    //public static double bac = 0;
     public static ArrayList<Drink> drinks = new ArrayList<>();
     public static boolean notSafe = false;
-    public static boolean weightSet = false;
+    //public static boolean weightSet = false;
 
-    Profile profile;
+    TextView weightDisplay;
+    Profile profile = new Profile();
+    Drink drink = new Drink();
 
-    // Receives the results from department activity
-    ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+    // Receives the results from Set Profile activity
+    ActivityResultLauncher<Intent> setProfileResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result != null && result.getResultCode() == RESULT_OK){
-                if(result.getData() != null && result.getData().getStringExtra(SetProfileActivity.PROFILE_KEY) != null){
+                if(result.getData() != null && result.getData().getParcelableExtra((SetProfileActivity.PROFILE_KEY)) != null){
                     profile = result.getData().getParcelableExtra(SetProfileActivity.PROFILE_KEY);
+                    String display = String.valueOf(profile.weight) + " lbs (" + profile.gender + ")";
+                    weightDisplay.setText(display);
+                }
+            }
+        }
+    });
+
+    // Receives the results from View Drinks activity
+    ActivityResultLauncher<Intent> startForDrinks = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result != null && result.getResultCode() == RESULT_OK){
+                if(result.getData() != null && result.getData().getParcelableExtra((ViewDrinksActivity.VIEW_DRINKS_KEY)) != null){
+                    // ** UPDATE BAC VALUES HERE **
+                }
+            }
+        }
+    });
+
+    // Receives the results from Add Drink activity
+    ActivityResultLauncher<Intent> addDrinkResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result != null && result.getResultCode() == RESULT_OK){
+                if(result.getData() != null && result.getData().getParcelableExtra((AddDrinkActivity.ADD_DRINK_KEY)) != null){
+                    drink = result.getData().getParcelableExtra(AddDrinkActivity.ADD_DRINK_KEY);
+                    // Add Drink to ArrayList
+                    drinks.add(drink);
+                    // ** UPDATE BAC VALUES HERE **
                 }
             }
         }
@@ -54,50 +85,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent profileIntent = new Intent(MainActivity.this, SetProfileActivity.class);
-                startForResult.launch(profileIntent);
+                weightDisplay = findViewById(R.id.weightDisplay);
+                setProfileResult.launch(profileIntent);
             }
         });
 
-        TextView weightDisplay = findViewById(R.id.weightDisplay);
+
+        // View Drinks
+        findViewById(R.id.viewDrinksButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewDrinksIntent = new Intent(MainActivity.this, ViewDrinksActivity.class);
+                startForDrinks.launch(viewDrinksIntent);
+            }
+        });
+
         TextView numDrinkDisplay = findViewById(R.id.numDrinkDisplay);
         TextView BACnum = findViewById(R.id.BACNum);
         Button addDrinkButton = findViewById(R.id.addDrinkButton2);
 
         // Add Drink Button
-        // Adds a drink to the number of drinks
-        // Also calls on a method that calculates the BAC Level and displays it
-        /*
-        findViewById(R.id.addDrinkButton2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.addDrinkButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if (!weightSet){
-                        throw new Exception();
-                    }
-
-                    numDrinks++;
-                    // Create a new drink object
-                    Drink drink = new Drink(alcohol_percentage, drinkSize);
-                    // Add the drink object to the ArrayList
-                    drinks.add(drink);
-                    // Display the new number of drinks
-                    numDrinkDisplay.setText(String.valueOf(numDrinks));
-                    // Calculate BAC and display
-
-                    bac = calculateBAC(output, weight);
-                    BACnum.setText(String.format("%.3f", bac));
-                    // Check to see if no more drinks should be given
-                    checkBACLevel(bac);
-
-                    // If the BAC Level is above 0.25, notSafe is true
-                    // Disable Add Drink button
-                    if (notSafe) {
-                        Toast.makeText(MainActivity.this, "No more drinks for you.", Toast.LENGTH_LONG).show();
-                        addDrinkButton.setEnabled(false);
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(MainActivity.this, "Please set a weight and gender", Toast.LENGTH_SHORT).show();
-                }
+                Intent addDrinkIntent = new Intent(MainActivity.this, AddDrinkActivity.class);
+                addDrinkResult.launch(addDrinkIntent);
             }
         });
 
@@ -105,24 +117,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.resetButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Global Variables set back to default
-                output = "";
-                drinkSize = 1;
-                alcohol_percentage = 0;
-                numDrinks = 0;
-                weight = 0;
-                bac = 0;
-                notSafe = false;
-                weightSet = false;
 
                 // Set components' values back to default
                 weightDisplay.setText(getResources().getText(R.string.weight_display));
                 numDrinkDisplay.setText(getResources().getText(R.string.num_drinks));
-                genderGroup.clearCheck();
-                genderGroup.check(R.id.radioFemale);
-                drink_size_group.check(R.id.one_oz);
                 drinks.clear();
-                addDrinkButton.setEnabled(true);
+                //addDrinkButton.setEnabled(true);
+                notSafe = false;
 
                 // Set status message to default via strings.xml
                 TextView status = findViewById(R.id.status);
@@ -134,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                 BACNum.setText(getResources().getText(R.string.BAC_num));
             }
         });
-        */
     }
 
 
@@ -146,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
      * @param weight the weight entered
      * @return double value of the % BAC
      */
-    /*
     public double calculateBAC(String gender, int weight){
         double bac;
         double r;
@@ -171,15 +170,11 @@ public class MainActivity extends AppCompatActivity {
         return bac;
     }
 
-
-     */
-
     /**
      * This method checks the BAC Level to determine the status message
      * It also sets the boolean notSafe to true if the BAC level is higher than .25
      * @param bac double value used to determine the status
      */
-    /*
     public void checkBACLevel(double bac){
 
         TextView status = findViewById(R.id.status);
@@ -203,5 +198,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-     */
 }

@@ -2,7 +2,9 @@ package com.example.group9_hw1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ public class AddDrinkActivity extends AppCompatActivity {
 
     public static double alcohol_percentage = 0;
     public static int drinkSize = 1;
+    final public static String ADD_DRINK_KEY = "ADD_DRINK";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,27 @@ public class AddDrinkActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+
+        findViewById(R.id.addDrinkButton2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create Drink object with selected data
+                Drink drink = new Drink(alcohol_percentage, drinkSize);
+
+                // Intent to send the drink object back to the Main Activity
+                Intent returnDrink = new Intent(AddDrinkActivity.this, MainActivity.class);
+                returnDrink.putExtra(ADD_DRINK_KEY, drink);
+                setResult(RESULT_OK, returnDrink);
+                finish();
+            }
+        });
+
+        findViewById(R.id.cancelButton2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
