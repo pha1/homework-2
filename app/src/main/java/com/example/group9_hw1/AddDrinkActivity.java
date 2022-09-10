@@ -9,11 +9,17 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class AddDrinkActivity extends AppCompatActivity {
 
     public static double alcohol_percentage = 0;
     public static int drinkSize = 1;
     final public static String ADD_DRINK_KEY = "ADD_DRINK";
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +76,13 @@ public class AddDrinkActivity extends AppCompatActivity {
         findViewById(R.id.addDrinkButton2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
+                date = simpleDateFormat.format(calendar.getTime());
+
                 // Create Drink object with selected data
-                Drink drink = new Drink(alcohol_percentage, drinkSize);
+                Drink drink = new Drink(alcohol_percentage, drinkSize, date);
+
 
                 // Intent to send the drink object back to the Main Activity
                 Intent returnDrink = new Intent(AddDrinkActivity.this, MainActivity.class);

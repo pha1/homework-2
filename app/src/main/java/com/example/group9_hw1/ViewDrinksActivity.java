@@ -14,7 +14,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
 
     public static int numDrinks = 0;
     final public static String VIEW_DRINKS_KEY = "VIEW_DRINKS";
-    public static ArrayList<Drink> drinks = new ArrayList<>();
+    public static ArrayList<Drink> drinks = new ArrayList<Drink>();
     public int current = 0;
     public Drink drink = new Drink();
 
@@ -22,6 +22,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
     TextView totalDrinks;
     TextView drinkSize;
     TextView alcoholPercentage;
+    TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +36,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
             updateUI();
         }
 
-
-
-        // Click next to get the next drink in the ArrayList
+            // Click next to get the next drink in the ArrayList
         // If the current drink is the last drink then show the first drink next
         findViewById(R.id.nextButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +104,8 @@ public class ViewDrinksActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
     public void updateUI(){
@@ -120,5 +121,9 @@ public class ViewDrinksActivity extends AppCompatActivity {
 
         alcoholPercentage = findViewById(R.id.textView7);
         alcoholPercentage.setText(String.valueOf(drink.alcohol_percentage));
+
+        date = findViewById(R.id.textView10);
+        date.setText(String.valueOf(drink.date));
+
     }
 }
