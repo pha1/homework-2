@@ -13,6 +13,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
     final public static String VIEW_DRINKS_KEY = "VIEW_DRINKS";
     public ArrayList<Drink> drinks;
     public int current = 0;
+    public Drink drink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
 
         if(getIntent() != null && getIntent().getExtras() != null && getIntent().hasExtra(MainActivity.DRINKS_KEY)){
             drinks = getIntent().getParcelableExtra(MainActivity.DRINKS_KEY);
-            drinks.get(current);
+            drink = drinks.get(current);
         }
 
 
@@ -33,10 +34,10 @@ public class ViewDrinksActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (drinks.get(current) == drinks.get(drinks.size()-1)){
-                    drinks.get(0);
+                    drink = drinks.get(0);
                 }
                 else {
-                    drinks.get(current++);
+                    drink = drinks.get(current++);
                 }
             }
         });
@@ -48,7 +49,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
                 if (drinks != null){
                     drinks.remove(current);
                 }
-                drinks.get(current--);
+                drink = drinks.get(current--);
             }
         });
 
@@ -59,11 +60,11 @@ public class ViewDrinksActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(drinks != null){
                     if(drinks.get(current) == drinks.get(0)){
-                        drinks.get(drinks.size()-1);
+                        drink = drinks.get(drinks.size()-1);
                     }
                 }
                 else{
-                    drinks.get(current--);
+                    drink = drinks.get(current--);
                 }
             }
         });
