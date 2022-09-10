@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result != null && result.getResultCode() == RESULT_OK){
-                if(result.getData() != null && result.getData().getParcelableExtra((ViewDrinksActivity.VIEW_DRINKS_KEY)) != null){
+                if(result.getData() != null && result.getData().getParcelableArrayListExtra((ViewDrinksActivity.VIEW_DRINKS_KEY)) != null){
 
                     // Update the ArrayList
-                    drinks = result.getData().getParcelableExtra(ViewDrinksActivity.VIEW_DRINKS_KEY);
+                    drinks = result.getData().getParcelableArrayListExtra(ViewDrinksActivity.VIEW_DRINKS_KEY);
 
                     // Update BAC value
                     bac = calculateBAC(profile, drinks);

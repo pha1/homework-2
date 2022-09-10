@@ -47,7 +47,8 @@ public class ViewDrinksActivity extends AppCompatActivity {
                     updateUI();
                 }
                 else {
-                    drink = drinks.get(current++);
+                    current++;
+                    drink = drinks.get(current);
                     updateUI();
                 }
             }
@@ -59,14 +60,18 @@ public class ViewDrinksActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (drinks != null){
                     drinks.remove(current);
-                    drink = drinks.get(current--);
+
+                    if (drinks.size() < 1)
+                    {
+                        Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
+                        returnDrinks.putExtra(VIEW_DRINKS_KEY, drinks);
+                        setResult(RESULT_OK, returnDrinks);
+                        finish();
+                    }
+
+                    current--;
+                    drink = drinks.get(current);
                     updateUI();
-                }
-                else {
-                    Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
-                    returnDrinks.putExtra(VIEW_DRINKS_KEY, drinks);
-                    setResult(RESULT_OK, returnDrinks);
-                    finish();
                 }
 
             }
@@ -77,14 +82,13 @@ public class ViewDrinksActivity extends AppCompatActivity {
         findViewById(R.id.previousButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(drinks != null){
-                    if(drinks.get(current) == drinks.get(0)){
-                        drink = drinks.get(drinks.size()-1);
-                        updateUI();
-                    }
+                if(drinks.get(current) == drinks.get(0)){
+                    drink = drinks.get(drinks.size()-1);
+                    updateUI();
                 }
                 else{
-                    drink = drinks.get(current--);
+                    current--;
+                    drink = drinks.get(current);
                     updateUI();
                 }
             }
@@ -106,7 +110,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
     public void updateUI(){
 
         currentDrink = findViewById(R.id.textView2);
-        currentDrink.setText(String.valueOf(current));
+        currentDrink.setText(String.valueOf(current + 1));
 
         totalDrinks = findViewById(R.id.textView4);
         totalDrinks.setText(String.valueOf(drinks.size()));
