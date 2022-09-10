@@ -12,6 +12,7 @@ public class Drink implements Parcelable {
 
     double alcohol_percentage;
     int size;
+    String date;
 
     /**
      * Default Constructor
@@ -23,14 +24,16 @@ public class Drink implements Parcelable {
      * @param alcohol_percentage alcohol percentage of the drink as a double
      * @param size size of the drink as an int
      */
-    public Drink(double alcohol_percentage, int size){
+    public Drink(double alcohol_percentage, int size, String date){
         this.alcohol_percentage = alcohol_percentage;
         this.size = size;
+        this.date = date;
     }
 
     protected Drink(Parcel in) {
         alcohol_percentage = in.readDouble();
         size = in.readInt();
+        date = in.toString();
     }
 
     public static final Creator<Drink> CREATOR = new Creator<Drink>() {
@@ -54,5 +57,6 @@ public class Drink implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeDouble(this.alcohol_percentage);
         parcel.writeInt(this.size);
+        parcel.writeString(this.date);
     }
 }
