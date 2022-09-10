@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static double bac = 0;
     public static ArrayList<Drink> drinks = new ArrayList<>();
+    final public static String DRINKS_KEY = "DRINKS_KEY";
 
     TextView weightDisplay;
     TextView numDrinkDisplay;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     profile = result.getData().getParcelableExtra(SetProfileActivity.PROFILE_KEY);
                     String display = String.valueOf(profile.weight) + " lbs (" + profile.gender + ")";
                     weightDisplay.setText(display);
-                    // TODO
+
                     // Clear Drinks List, BAC and UI
                     clearUI();
                     // Enable View Drinks and Add Drink button
@@ -59,11 +60,16 @@ public class MainActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             if(result != null && result.getResultCode() == RESULT_OK){
                 if(result.getData() != null && result.getData().getParcelableExtra((ViewDrinksActivity.VIEW_DRINKS_KEY)) != null){
-                    // TODO
+
                     // Update the ArrayList
-                    // UPDATE BAC VALUES HERE -- The method is calculateBAC(profile, drinks)
+                    drinks = result.getData().getParcelableExtra(ViewDrinksActivity.VIEW_DRINKS_KEY);
+
+                    // Update BAC value
+                    bac = calculateBAC(profile, drinks);
+
                     // Display new values and status message
                     // If BAC < 0.25 enable "Add Drink", else disable "Add Drink"
+                    updateBacUI(bac);
                 }
             }
         }
@@ -75,13 +81,18 @@ public class MainActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             if(result != null && result.getResultCode() == RESULT_OK){
                 if(result.getData() != null && result.getData().getParcelableExtra((AddDrinkActivity.ADD_DRINK_KEY)) != null){
+
                     drink = result.getData().getParcelableExtra(AddDrinkActivity.ADD_DRINK_KEY);
+
                     // Add Drink to ArrayList
                     drinks.add(drink);
-                    // TODO
-                    // ** UPDATE BAC VALUES HERE **
+
+                    // Update BAC value
+                    bac = calculateBAC(profile, drinks);
+
                     // Update UI as needed
                     // If BAC >= 0.25, disable "Add Drink" and display a Toast Message "No more drinks for you."
+                    updateBacUI(bac);
                 }
             }
         }
@@ -110,15 +121,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.viewDrinksButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO
+
+                if (drinks.size() > 0) {
+                    // If there are drinks, send the ArrayList to ViewDrinksActivity
+                    Intent viewDrinksIntent = new Intent(MainActivity.this, ViewDrinksActivity.class);
+
+                    // Need to add the extras (ArrayList) to the Intent
+                    viewDrinksIntent.putExtra(DRINKS_KEY, drinks);
+                    startForDrinks.launch(viewDrinksIntent);
+                }
                 // If no drinks in the ArrayList - Toast Message "You've had no drinks."
-
-
-                // If there are drinks, send the ArrayList to ViewDrinksActivity
-                Intent viewDrinksIntent = new Intent(MainActivity.this, ViewDrinksActivity.class);
-                // TODO
-                // Need to add the extras (ArrayList) to the Intent
-                startForDrinks.launch(viewDrinksIntent);
+                else {
+                    Toast.makeText(MainActivity.this, "You have no drinks", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -202,13 +217,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method checks the BAC Level to determine the status message
+     * This method checks the BAC Level to determine the status message and updates the UI
      * @param bac double value used to determine the status
      */
-    public void checkBACLevel(double bac){
+    public void updateBacUI(double bac){
 
+        TextView numDrinks = findViewById(R.id.numDrinks);
         TextView status = findViewById(R.id.status);
 
+        // NUMBER OF DRINKS AND BAC LEVEL
+        numDrinks.setText(String.valueOf(drinks.size()));
+        bacLevel.setText(String.valueOf(bac));
+
+        // STATUS MESSAGE
+
+        // If the bac drops to 0.08 or lower, status is set to green and text: "You're safe."
         if (0 <= bac && bac <= 0.08) {
             status.setText(getResources().getText(R.string.status));
             status.setBackgroundColor(getResources().getColor(R.color.green));
