@@ -42,7 +42,8 @@ public class ViewDrinksActivity extends AppCompatActivity {
         findViewById(R.id.nextButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (drinks.get(current) == drinks.get(drinks.size()-1)){
+                if (drinks.get(current).equals(drinks.get(drinks.size()-1))){
+                    current = 0;
                     drink = drinks.get(0);
                     updateUI();
                 }
@@ -58,20 +59,24 @@ public class ViewDrinksActivity extends AppCompatActivity {
         findViewById(R.id.trashButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (drinks != null){
-                    drinks.remove(current);
+                drinks.remove(current);
 
-                    if (drinks.size() < 1)
+                if (drinks.size() > 1){
+                    if (current == 0)
                     {
-                        Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
-                        returnDrinks.putExtra(VIEW_DRINKS_KEY, drinks);
-                        setResult(RESULT_OK, returnDrinks);
-                        finish();
+                        current = drinks.size() - 1;
                     }
-
-                    current--;
+                    else {
+                        current--;
+                    }
                     drink = drinks.get(current);
                     updateUI();
+                }
+                else {
+                    Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
+                    returnDrinks.putExtra(VIEW_DRINKS_KEY, drinks);
+                    setResult(RESULT_OK, returnDrinks);
+                    finish();
                 }
 
             }
@@ -82,7 +87,8 @@ public class ViewDrinksActivity extends AppCompatActivity {
         findViewById(R.id.previousButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(drinks.get(current) == drinks.get(0)){
+                if(drinks.get(current).equals(drinks.get(0))){
+                    current = drinks.size() - 1;
                     drink = drinks.get(drinks.size()-1);
                     updateUI();
                 }
