@@ -222,12 +222,12 @@ public class MainActivity extends AppCompatActivity {
      */
     public void updateBacUI(double bac){
 
-        TextView numDrinks = findViewById(R.id.numDrinks);
+        TextView numDrinks = findViewById(R.id.numDrinkDisplay);
         TextView status = findViewById(R.id.status);
 
         // NUMBER OF DRINKS AND BAC LEVEL
         numDrinks.setText(String.valueOf(drinks.size()));
-        bacLevel.setText(String.valueOf(bac));
+        bacLevel.setText(String.valueOf(String.format("%.3f", bac)));
 
         // STATUS MESSAGE
 

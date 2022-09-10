@@ -30,7 +30,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
         setTitle("View Drinks");
 
         if(getIntent() != null && getIntent().getExtras() != null && getIntent().hasExtra(MainActivity.DRINKS_KEY)){
-            drinks = getIntent().getParcelableExtra(MainActivity.DRINKS_KEY);
+            drinks = getIntent().getParcelableArrayListExtra(MainActivity.DRINKS_KEY);
             drink = drinks.get(current);
             updateUI();
         }
