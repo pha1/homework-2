@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        weightDisplay = findViewById(R.id.weightDisplay);
+        numDrinkDisplay = findViewById(R.id.numDrinkDisplay);
+
         // Set Profile Activity
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
