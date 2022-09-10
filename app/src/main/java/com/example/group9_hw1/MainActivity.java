@@ -15,9 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +22,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    //public static double bac = 0;
+    public static double bac = 0;
     public static ArrayList<Drink> drinks = new ArrayList<>();
-    public static boolean notSafe = false;
-    //public static boolean weightSet = false;
 
     TextView weightDisplay;
+    TextView numDrinkDisplay;
+    TextView bacLevel;
+    TextView status;
+
     Profile profile = new Profile();
     Drink drink = new Drink();
 
@@ -43,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
                     profile = result.getData().getParcelableExtra(SetProfileActivity.PROFILE_KEY);
                     String display = String.valueOf(profile.weight) + " lbs (" + profile.gender + ")";
                     weightDisplay.setText(display);
+                    // TODO
+                    // Clear Drinks List, BAC and UI
+                    clearUI();
+                    // Enable View Drinks and Add Drink button
+                    findViewById(R.id.viewDrinksButton).setEnabled(true);
+                    findViewById(R.id.addDrinkButton).setEnabled(true);
                 }
             }
         }
@@ -54,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             if(result != null && result.getResultCode() == RESULT_OK){
                 if(result.getData() != null && result.getData().getParcelableExtra((ViewDrinksActivity.VIEW_DRINKS_KEY)) != null){
-                    // ** UPDATE BAC VALUES HERE **
+                    // TODO
+                    // Update the ArrayList
+                    // UPDATE BAC VALUES HERE -- The method is calculateBAC(profile, drinks)
+                    // Display new values and status message
+                    // If BAC < 0.25 enable "Add Drink", else disable "Add Drink"
                 }
             }
         }
@@ -69,7 +78,10 @@ public class MainActivity extends AppCompatActivity {
                     drink = result.getData().getParcelableExtra(AddDrinkActivity.ADD_DRINK_KEY);
                     // Add Drink to ArrayList
                     drinks.add(drink);
+                    // TODO
                     // ** UPDATE BAC VALUES HERE **
+                    // Update UI as needed
+                    // If BAC >= 0.25, disable "Add Drink" and display a Toast Message "No more drinks for you."
                 }
             }
         }
@@ -95,14 +107,17 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.viewDrinksButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO
+                // If no drinks in the ArrayList - Toast Message "You've had no drinks."
+
+
+                // If there are drinks, send the ArrayList to ViewDrinksActivity
                 Intent viewDrinksIntent = new Intent(MainActivity.this, ViewDrinksActivity.class);
+                // TODO
+                // Need to add the extras (ArrayList) to the Intent
                 startForDrinks.launch(viewDrinksIntent);
             }
         });
-
-        TextView numDrinkDisplay = findViewById(R.id.numDrinkDisplay);
-        TextView BACnum = findViewById(R.id.BACNum);
-        Button addDrinkButton = findViewById(R.id.addDrinkButton2);
 
         // Add Drink Button
         findViewById(R.id.addDrinkButton).setOnClickListener(new View.OnClickListener() {
@@ -118,41 +133,54 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                // Clear the User Profile
+                profile = new Profile();
+
                 // Set components' values back to default
                 weightDisplay.setText(getResources().getText(R.string.weight_display));
                 numDrinkDisplay.setText(getResources().getText(R.string.num_drinks));
-                drinks.clear();
-                //addDrinkButton.setEnabled(true);
-                notSafe = false;
 
-                // Set status message to default via strings.xml
-                TextView status = findViewById(R.id.status);
-                status.setText(getResources().getText(R.string.status));
-                status.setBackgroundColor(getResources().getColor(R.color.green));
+                // Disable buttons
+                findViewById(R.id.viewDrinksButton).setEnabled(false);
+                findViewById(R.id.addDrinkButton).setEnabled(false);
 
-                // Set BAC Level to 0.000 via strings.xml
-                TextView BACNum = findViewById(R.id.BACNum);
-                BACNum.setText(getResources().getText(R.string.BAC_num));
+                clearUI();
             }
         });
     }
 
+    /**
+     * This method clears the UI when setting the profile
+     */
+    public void clearUI(){
+        // Clear Drinks List
+        drinks.clear();
 
+        // Set status message to default via strings.xml
+        status = findViewById(R.id.status);
+        status.setText(getResources().getText(R.string.status));
+        status.setBackgroundColor(getResources().getColor(R.color.green));
+
+        // Set BAC Level to 0.000 via strings.xml
+        bacLevel = findViewById(R.id.bacLevel);
+        bacLevel.setText(getResources().getText(R.string.BAC_num));
+        bac = 0;
+    }
 
     /**
      * This method calculates the BAC Level with the given formula
      * % BAC = A * 5.14 / Weight * r
-     * @param gender the gender selected
-     * @param weight the weight entered
+     * @param profile the profile of the user
+     * @param drinks the list of drinks
      * @return double value of the % BAC
      */
-    public double calculateBAC(String gender, int weight){
+    public double calculateBAC(Profile profile, ArrayList<Drink> drinks){
         double bac;
         double r;
         double a = 0;
 
         // Set the r value for female
-        if (gender.equals("Female")){
+        if (profile.gender.equals("Female")){
             r = .66;
         }
         // Set the r value for male
@@ -165,37 +193,40 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // BAC Formula
-        bac = (a * 5.14) / (weight * r);
+        bac = (a * 5.14) / (profile.weight * r);
 
         return bac;
     }
 
     /**
      * This method checks the BAC Level to determine the status message
-     * It also sets the boolean notSafe to true if the BAC level is higher than .25
      * @param bac double value used to determine the status
      */
     public void checkBACLevel(double bac){
 
         TextView status = findViewById(R.id.status);
 
+        if (0 <= bac && bac <= 0.08) {
+            status.setText(getResources().getText(R.string.status));
+            status.setBackgroundColor(getResources().getColor(R.color.green));
+        }
         // Sets the status to "Be careful." and changes the color to orange
-        if (0.08 <= bac && bac <= 0.2){
+        else if (0.08 < bac && bac <= 0.2){
             status.setText(getResources().getText(R.string.status2));
             status.setBackgroundColor(getResources().getColor(R.color.orange));
         }
 
         // Sets the status to "Over the limit!" and changes the color to red
-        else if (bac > 0.2 && bac < 0.25){
+        else {
             status.setText(getResources().getText(R.string.status3));
             status.setBackgroundColor(getResources().getColor(R.color.red));
-        }
-        // Once the BAC reaches over 0.25, change the boolean value of notSafe
-        // This will disable the "Add Drink" button
-        else if (bac >= 0.25)
-        {
-            notSafe = true;
 
+            // Once the BAC reaches over 0.25, display Toast Message "No more drinks for you
+            // This will disable the "Add Drink" button
+            if (bac >= 0.25) {
+                Toast.makeText(this, "No more drinks for you.", Toast.LENGTH_LONG).show();
+                findViewById(R.id.addDrinkButton).setEnabled(false);
+            }
         }
     }
 }

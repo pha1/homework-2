@@ -52,6 +52,7 @@
         android:text="@string/add_drink"
         android:textAllCaps="false"
         android:textSize="16sp"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewDrinksButton" />
@@ -66,6 +67,7 @@
         android:text="@string/view_drinks"
         android:textAllCaps="false"
         android:textSize="16sp"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status" />
@@ -107,7 +109,7 @@
         app:layout_constraintTop_toBottomOf="@+id/numDrinks" />
 
     <TextView
-        android:id="@+id/BACNum"
+        android:id="@+id/bacLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
