@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -12,9 +14,14 @@ public class ViewDrinksActivity extends AppCompatActivity {
 
     public static int numDrinks = 0;
     final public static String VIEW_DRINKS_KEY = "VIEW_DRINKS";
-    public ArrayList<Drink> drinks;
+    public static ArrayList<Drink> drinks = new ArrayList<>();
     public int current = 0;
-    public Drink drink;
+    public Drink drink = new Drink();
+
+    TextView currentDrink;
+    TextView totalDrinks;
+    TextView drinkSize;
+    TextView alcoholPercentage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
         if(getIntent() != null && getIntent().getExtras() != null && getIntent().hasExtra(MainActivity.DRINKS_KEY)){
             drinks = getIntent().getParcelableExtra(MainActivity.DRINKS_KEY);
             drink = drinks.get(current);
+            updateUI();
         }
 
 
@@ -36,9 +44,11 @@ public class ViewDrinksActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (drinks.get(current) == drinks.get(drinks.size()-1)){
                     drink = drinks.get(0);
+                    updateUI();
                 }
                 else {
                     drink = drinks.get(current++);
+                    updateUI();
                 }
             }
         });
@@ -50,6 +60,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
                 if (drinks != null){
                     drinks.remove(current);
                     drink = drinks.get(current--);
+                    updateUI();
                 }
                 else {
                     Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
@@ -69,10 +80,12 @@ public class ViewDrinksActivity extends AppCompatActivity {
                 if(drinks != null){
                     if(drinks.get(current) == drinks.get(0)){
                         drink = drinks.get(drinks.size()-1);
+                        updateUI();
                     }
                 }
                 else{
                     drink = drinks.get(current--);
+                    updateUI();
                 }
             }
         });
@@ -88,5 +101,20 @@ public class ViewDrinksActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void updateUI(){
+
+        currentDrink = findViewById(R.id.textView2);
+        currentDrink.setText(String.valueOf(current));
+
+        totalDrinks = findViewById(R.id.textView4);
+        totalDrinks.setText(String.valueOf(drinks.size()));
+
+        drinkSize = findViewById(R.id.textView6);
+        drinkSize.setText(String.valueOf(drink.size));
+
+        alcoholPercentage = findViewById(R.id.textView7);
+        alcoholPercentage.setText(String.valueOf(drink.alcohol_percentage));
     }
 }
