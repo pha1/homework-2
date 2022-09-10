@@ -2,6 +2,7 @@ package com.example.group9_hw1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -48,8 +49,15 @@ public class ViewDrinksActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (drinks != null){
                     drinks.remove(current);
+                    drink = drinks.get(current--);
                 }
-                drink = drinks.get(current--);
+                else {
+                    Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
+                    returnDrinks.putExtra(VIEW_DRINKS_KEY, drinks);
+                    setResult(RESULT_OK, returnDrinks);
+                    finish();
+                }
+
             }
         });
 
@@ -73,6 +81,10 @@ public class ViewDrinksActivity extends AppCompatActivity {
         findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Intent to send the (updated) drinks ArrayList back to the Main Activity
+                Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
+                returnDrinks.putExtra(VIEW_DRINKS_KEY, drinks);
+                setResult(RESULT_OK, returnDrinks);
                 finish();
             }
         });
