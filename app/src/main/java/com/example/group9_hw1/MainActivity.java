@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 if(result.getData() != null && result.getData().getParcelableExtra((AddDrinkActivity.ADD_DRINK_KEY)) != null){
 
                     drink = result.getData().getParcelableExtra(AddDrinkActivity.ADD_DRINK_KEY);
-
                     // Add Drink to ArrayList
                     drinks.add(drink);
 
@@ -235,11 +234,13 @@ public class MainActivity extends AppCompatActivity {
         if (0 <= bac && bac <= 0.08) {
             status.setText(getResources().getText(R.string.status));
             status.setBackgroundColor(getResources().getColor(R.color.green));
+            findViewById(R.id.addDrinkButton).setEnabled(true);
         }
         // Sets the status to "Be careful." and changes the color to orange
         else if (0.08 < bac && bac <= 0.2){
             status.setText(getResources().getText(R.string.status2));
             status.setBackgroundColor(getResources().getColor(R.color.orange));
+            findViewById(R.id.addDrinkButton).setEnabled(true);
         }
 
         // Sets the status to "Over the limit!" and changes the color to red

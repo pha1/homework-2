@@ -37,21 +37,23 @@ public class ViewDrinksActivity extends AppCompatActivity {
             updateUI();
         }
 
-            // Click next to get the next drink in the ArrayList
+        // Click next to get the next drink in the ArrayList
         // If the current drink is the last drink then show the first drink next
         findViewById(R.id.nextButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Check to see if current drink is the last drink in the list
+                // if it is move to the first drink
                 if (drinks.get(current).equals(drinks.get(drinks.size()-1))){
                     current = 0;
                     drink = drinks.get(0);
-                    updateUI();
                 }
+                // if not, next drink
                 else {
                     current++;
                     drink = drinks.get(current);
-                    updateUI();
                 }
+                updateUI();
             }
         });
 
@@ -59,8 +61,10 @@ public class ViewDrinksActivity extends AppCompatActivity {
         findViewById(R.id.trashButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Remove the current drink
                 drinks.remove(current);
 
+                // If there are drinks in the list
                 if (drinks.size() > 1){
                     if (current == 0)
                     {
@@ -72,6 +76,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
                     drink = drinks.get(current);
                     updateUI();
                 }
+                // If there are no drinks in the list
                 else {
                     Intent returnDrinks = new Intent(ViewDrinksActivity.this, MainActivity.class);
                     returnDrinks.putExtra(VIEW_DRINKS_KEY, drinks);
@@ -87,16 +92,18 @@ public class ViewDrinksActivity extends AppCompatActivity {
         findViewById(R.id.previousButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // If this is the first drink
+                // Display the last drink in the list
                 if(drinks.get(current).equals(drinks.get(0))){
                     current = drinks.size() - 1;
                     drink = drinks.get(drinks.size()-1);
-                    updateUI();
                 }
+                // Show the previous drink
                 else{
                     current--;
                     drink = drinks.get(current);
-                    updateUI();
                 }
+                updateUI();
             }
         });
 
