@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -129,7 +130,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
         alcoholPercentage.setText(String.valueOf(drink.alcohol_percentage));
 
         date = findViewById(R.id.textView10);
-        date.setText(String.valueOf(drink.date));
+        date.setText(drink.date);
 
     }
 }

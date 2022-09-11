@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -77,7 +78,7 @@ public class AddDrinkActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 calendar = Calendar.getInstance();
-                simpleDateFormat = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
+                simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
                 date = simpleDateFormat.format(calendar.getTime());
 
                 // Create Drink object with selected data
