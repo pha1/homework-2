@@ -80,6 +80,7 @@ public class AddDrinkActivity extends AppCompatActivity {
                 calendar = Calendar.getInstance();
                 simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss aa");
                 date = simpleDateFormat.format(calendar.getTime());
+                Log.d("TEST", "onClick: " + date);
 
                 // Create Drink object with selected data
                 Drink drink = new Drink(alcohol_percentage, drinkSize, date);

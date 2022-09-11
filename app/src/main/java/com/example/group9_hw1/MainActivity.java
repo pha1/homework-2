@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // If no drinks in the ArrayList - Toast Message "You've had no drinks."
                 else {
+                    Log.d("TEST", "onClick: No drinks");
                     Toast.makeText(MainActivity.this, "You have no drinks", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -162,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.addDrinkButton).setEnabled(false);
 
                 clearUI();
+                Log.d("TEST", "onClick: clearUI successful");
             }
         });
     }
