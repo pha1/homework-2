@@ -16,7 +16,7 @@ import java.util.Calendar;
 public class AddDrinkActivity extends AppCompatActivity {
 
     public static double alcohol_percentage = 0;
-    public static int drinkSize = 1;
+    public static int drinkSize;
     final public static String ADD_DRINK_KEY = "ADD_DRINK";
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
@@ -32,6 +32,7 @@ public class AddDrinkActivity extends AppCompatActivity {
         TextView progress = findViewById(R.id.viewProgress);
 
         RadioGroup drink_size_group = findViewById(R.id.drink_size_group);
+        drinkSize = 1;
 
         // When the user clicks on a new size, the drink size is updated
         drink_size_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

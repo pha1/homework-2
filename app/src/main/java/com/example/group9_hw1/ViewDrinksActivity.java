@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -66,13 +65,15 @@ public class ViewDrinksActivity extends AppCompatActivity {
                 Log.d("TEST", "onClick: Number of drinks: " + drinks.size());
 
                 // If there are drinks in the list
-                if (drinks.size() > 1){
-                    if (current == 0)
-                    {
-                        current = drinks.size() - 1;
-                    }
-                    else {
-                        current--;
+                if (drinks.size() > 0) {
+                    if (drinks.size() ==  1) {
+                        current = 0;
+                    } else if (drinks.size() > 1) {
+                        if (current == 0) {
+                            current = drinks.size() - 1;
+                        } else {
+                            current--;
+                        }
                     }
                     drink = drinks.get(current);
                     updateUI();
@@ -125,19 +126,19 @@ public class ViewDrinksActivity extends AppCompatActivity {
 
     public void updateUI(){
 
-        currentDrink = findViewById(R.id.textView2);
+        currentDrink = findViewById(R.id.textviewCurrentDrink);
         currentDrink.setText(String.valueOf(current + 1));
 
-        totalDrinks = findViewById(R.id.textView4);
+        totalDrinks = findViewById(R.id.textViewTotalDrinks);
         totalDrinks.setText(String.valueOf(drinks.size()));
 
-        drinkSize = findViewById(R.id.textView6);
+        drinkSize = findViewById(R.id.textviewDrinkSize);
         drinkSize.setText(String.valueOf(drink.size));
 
-        alcoholPercentage = findViewById(R.id.textView7);
+        alcoholPercentage = findViewById(R.id.textViewPercentage);
         alcoholPercentage.setText(String.valueOf(drink.alcohol_percentage));
 
-        date = findViewById(R.id.textView10);
+        date = findViewById(R.id.textViewDateTime);
         date.setText(drink.date);
 
     }
