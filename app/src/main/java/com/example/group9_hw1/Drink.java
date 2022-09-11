@@ -7,6 +7,7 @@ package com.example.group9_hw1;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Drink implements Parcelable {
 
@@ -33,7 +34,7 @@ public class Drink implements Parcelable {
     protected Drink(Parcel in) {
         alcohol_percentage = in.readDouble();
         size = in.readInt();
-        date = in.toString();
+        date = in.readString();
     }
 
     public static final Creator<Drink> CREATOR = new Creator<Drink>() {
