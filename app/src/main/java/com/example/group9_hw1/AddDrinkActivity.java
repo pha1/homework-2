@@ -78,7 +78,7 @@ public class AddDrinkActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 calendar = Calendar.getInstance();
-                simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
+                simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss aa");
                 date = simpleDateFormat.format(calendar.getTime());
 
                 // Create Drink object with selected data
