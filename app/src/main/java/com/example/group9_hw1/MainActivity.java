@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             if(result != null && result.getResultCode() == RESULT_OK){
                 if(result.getData() != null && result.getData().getParcelableExtra((SetProfileActivity.PROFILE_KEY)) != null){
                     profile = result.getData().getParcelableExtra(SetProfileActivity.PROFILE_KEY);
+                    Log.d("TEST", "onActivityResult: Successfully got profile");
                     String display = String.valueOf(profile.weight) + " lbs (" + profile.gender + ")";
                     weightDisplay.setText(display);
 
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     drink = result.getData().getParcelableExtra(AddDrinkActivity.ADD_DRINK_KEY);
                     // Add Drink to ArrayList
                     drinks.add(drink);
+                    Log.d("TEST", "onActivityResult: Drinks: " + drinks.size());
 
                     // Update BAC value
                     bac = calculateBAC(profile, drinks);
@@ -165,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
 
                 clearUI();
                 Log.d("TEST", "onClick: clearUI successful");
+                Log.d("TEST", "onClick: Drinks: " + drinks.size() + ", Profile weight: " +
+                        profile.weight + ", Profile gender: " + profile.gender);
             }
         });
     }
@@ -238,12 +242,14 @@ public class MainActivity extends AppCompatActivity {
             status.setText(getResources().getText(R.string.status));
             status.setBackgroundColor(getResources().getColor(R.color.green));
             findViewById(R.id.addDrinkButton).setEnabled(true);
+            Log.d("TEST", "updateBacUI: Green successful");
         }
         // Sets the status to "Be careful." and changes the color to orange
         else if (0.08 < bac && bac <= 0.2){
             status.setText(getResources().getText(R.string.status2));
             status.setBackgroundColor(getResources().getColor(R.color.orange));
             findViewById(R.id.addDrinkButton).setEnabled(true);
+            Log.d("TEST", "updateBacUI: Orange successful");
         }
 
         // Sets the status to "Over the limit!" and changes the color to red
@@ -256,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
             if (bac >= 0.25) {
                 Toast.makeText(this, "No more drinks for you.", Toast.LENGTH_LONG).show();
                 findViewById(R.id.addDrinkButton).setEnabled(false);
+                Log.d("TEST", "updateBacUI: Red successful");
+
             }
         }
     }

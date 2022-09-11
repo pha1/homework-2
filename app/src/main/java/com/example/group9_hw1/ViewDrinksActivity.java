@@ -63,6 +63,7 @@ public class ViewDrinksActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Remove the current drink
                 drinks.remove(current);
+                Log.d("TEST", "onClick: Number of drinks: " + drinks.size());
 
                 // If there are drinks in the list
                 if (drinks.size() > 1){

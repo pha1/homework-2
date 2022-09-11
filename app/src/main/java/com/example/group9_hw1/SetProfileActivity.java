@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -54,6 +55,7 @@ public class SetProfileActivity extends AppCompatActivity {
                     }
 
                     Profile profile = new Profile(gender, weight);
+                    Log.d("TEST", "onClick: Profile created");
 
                     Intent intent = new Intent(SetProfileActivity.this, MainActivity.class);
                     intent.putExtra(PROFILE_KEY, profile);
