@@ -263,7 +263,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "No more drinks for you.", Toast.LENGTH_LONG).show();
                 findViewById(R.id.addDrinkButton).setEnabled(false);
                 Log.d("TEST", "updateBacUI: Red successful");
-
+            }
+            else {
+                findViewById(R.id.addDrinkButton).setEnabled(true);
             }
         }
     }
