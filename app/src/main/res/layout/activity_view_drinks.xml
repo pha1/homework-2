@@ -118,6 +118,7 @@
         android:layout_width="116dp"
         android:layout_height="42dp"
         android:text="@string/view_drinks_close"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"

@@ -1,3 +1,10 @@
+/**
+ * Homework 2
+ * Group9_HW2
+ * Phi Ha
+ * Srinath Dittakavi
+ */
+
 package com.example.group9_hw1;
 
 import android.os.Parcel;
